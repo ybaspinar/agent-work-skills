@@ -1,0 +1,53 @@
+[
+  {
+    "id": "task-avoidance",
+    "prompt": "I keep avoiding this task because it feels too big.",
+    "should_trigger": true,
+    "fixture": "task-avoidance.good.md",
+    "must_include": [
+      "task needs to be shrunk",
+      "10-minute first action",
+      "clear stop point"
+    ],
+    "must_not_include": [
+      "just be confident",
+      "stop procrastinating"
+    ],
+    "required_patterns": [
+      "Smallest next move|Next move",
+      "Evidence/control/leverage created"
+    ]
+  },
+  {
+    "id": "work-frustration",
+    "prompt": "Bug reports keep arriving incomplete.",
+    "should_trigger": true,
+    "fixture": "work-frustration.good.md",
+    "must_include": [
+      "bug intake",
+      "reproducibility",
+      "triage gate"
+    ],
+    "must_not_include": [
+      "people are stupid",
+      "just ignore them"
+    ],
+    "required_patterns": [
+      "Smallest next move|Next move",
+      "Safety margin|guardrail"
+    ]
+  },
+  {
+    "id": "factual-question",
+    "prompt": "What is the capital of Germany?",
+    "should_trigger": false,
+    "fixture": "factual-question.no-trigger.md",
+    "must_include": ["Berlin"],
+    "must_not_include": [
+      "See clearly",
+      "Choose deliberately",
+      "Speak precisely",
+      "Move decisively"
+    ]
+  }
+]
