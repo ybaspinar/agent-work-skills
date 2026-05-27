@@ -4,11 +4,11 @@
 
 Create a private Letta Code skill named `deliberate-response-loop` that helps an agent convert emotionally charged moments, avoidance, anxiety, frustration, ambition, and conflict into clear perception, deliberate choice, precise language, and concrete action.
 
-The skill is personal and private. It can preserve the original operating philosophy more directly than the public development skill, but it should still be practical rather than theatrical.
+The skill is private but should not depend on anecdotes or identifying examples. It should preserve the operating philosophy while staying practical rather than theatrical.
 
 ## Audience
 
-The primary audience is Yusuf and agents assisting Yusuf. The skill may include personal phrasing and recurring examples, but it should avoid unnecessary private details. Because this repository is intended to be private, the skill can carry more identity-specific framing than a public skill.
+The primary audience is agents helping with emotionally charged or avoidant situations. The skill should be safe to keep private, but its content should still be general enough to avoid unnecessary identifying details.
 
 ## Skill name
 
@@ -30,7 +30,7 @@ Example trigger phrases:
 - "turn this into a system observation"
 - "I'm anxious about..."
 - "I need to handle this strategically"
-- "I'm stuck because I don't want to engage with this"
+- "I'm stuck because I don't want to deal with this"
 - "what's the smallest next move"
 
 ## Core mantra
@@ -132,18 +132,18 @@ Leverage point:
 Possible sentence:
 ```
 
-### Controlled engagement pattern
+### Controlled exposure pattern
 
-Use when the issue is avoidance of active engagement with something high-stakes or cognitively heavy.
+Use when the issue is avoidance of a high-stakes or cognitively heavy situation.
 
 Key line:
 
-> I am not learning to be fearless. I am learning to stay engaged.
+> I am not learning to be fearless. I am learning to act with enough margin.
 
 Process:
 
 1. Shrink the situation until readiness is not required.
-2. Interact with the system at low risk.
+2. Take one low-risk action.
 3. Keep margin.
 4. Correct calmly.
 5. Repeat until the level becomes boring enough.
@@ -162,7 +162,7 @@ The agent should help choose an action that creates evidence rather than offerin
 
 ### Work frustration
 
-User: "QA keeps giving garbage tickets."
+User: "Bug reports keep arriving incomplete."
 
 Expected framing:
 
@@ -171,16 +171,16 @@ Expected framing:
 - Speak precisely: "The bug intake format is missing reproducibility, expected behavior, and impact, so engineering spends time reverse-engineering reports."
 - Move decisively: Propose a minimum bug template and triage gate with examples of good and bad reports.
 
-### Driving avoidance
+### Task avoidance
 
-User: "I avoid engaging with the car."
+User: "I keep avoiding this task because it feels too big."
 
 Expected framing:
 
-- See clearly: The issue is not only fear of accidents; active control feels cognitively heavy and high-stakes.
-- Choose deliberately: The goal is to make the car a usable tool, not to prove fearlessness.
-- Speak precisely: "I am avoiding active engagement with the car because control feels heavy, but controlled interaction is how the car becomes predictable."
-- Move decisively: Do one low-risk engagement session: sit in the car, rehearse controls, start/stop, shift deliberately, brake smoothly, and stop before overwhelm.
+- See clearly: The visible issue is procrastination; the hidden loop is that the task is too large to start safely, so avoidance reduces pressure short-term.
+- Choose deliberately: The goal is not to finish everything at once; the goal is to create the first piece of evidence that the task can be engaged.
+- Speak precisely: "This is not a motivation problem yet; the task needs to be shrunk until the first action is safe enough to start."
+- Move decisively: Define a 10-minute first action with a clear stop point.
 
 ### Ambition and compounding
 
@@ -202,7 +202,7 @@ deliberate-response-loop/
 └── SKILL.md
 ```
 
-No scripts, assets, or references are needed for the first version. If the skill grows, examples can move to `references/examples.md` and private recurring patterns can move to `references/patterns.md`.
+No scripts, assets, or references are needed for the first version. If the skill grows, examples can move to `references/examples.md` and recurring patterns can move to `references/patterns.md`.
 
 ## Success criteria
 
