@@ -1,0 +1,67 @@
+[
+  {
+    "id": "poster-export-impact",
+    "prompt": "Summarize completed poster export work from annotations.",
+    "fixture": "poster-export-impact.good.md",
+    "must_include": [
+      "1 -> 4",
+      "A4",
+      "A3",
+      "12x18",
+      "square",
+      "browser"
+    ],
+    "must_not_include": [
+      "@impact",
+      "guaranteed faster",
+      "users loved"
+    ],
+    "required_patterns": [
+      "One-line summary",
+      "Quantification",
+      "Validation|Evidence"
+    ]
+  },
+  {
+    "id": "no-fake-performance",
+    "prompt": "Create a sprint review summary from notes with no measurements.",
+    "fixture": "no-fake-performance.good.md",
+    "must_include": [
+      "No performance measurement was taken",
+      "maintainability",
+      "missing image metadata",
+      "empty title"
+    ],
+    "must_not_include": [
+      "faster",
+      "reduced latency",
+      "performance improved",
+      "speedup"
+    ],
+    "required_patterns": [
+      "Validation|Evidence",
+      "Possible metric to verify|Not measured|No performance measurement"
+    ]
+  },
+  {
+    "id": "annotation-aggregation",
+    "prompt": "Aggregate rough @impact/@evidence/@followup notes into manager-ready text.",
+    "fixture": "annotation-aggregation.good.md",
+    "must_include": [
+      "cover art is unavailable",
+      "mocked missing-art response",
+      "local album fixture",
+      "copy is reviewed"
+    ],
+    "must_not_include": [
+      "@impact",
+      "@evidence",
+      "@followup"
+    ],
+    "required_patterns": [
+      "MR description",
+      "Release note",
+      "Follow-ups"
+    ]
+  }
+]
