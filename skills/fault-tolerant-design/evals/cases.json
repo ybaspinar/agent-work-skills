@@ -1,0 +1,67 @@
+[
+  {
+    "id": "external-api-worker",
+    "prompt": "Review a background worker that enriches records by calling an external API before writing enrichment results to the database.",
+    "fixture": "external-api-worker.good.md",
+    "must_include": [
+      "Record ingestion must not depend on optional enrichment",
+      "bounded retries",
+      "dead-letter queue",
+      "last known good enrichment",
+      "idempotent writes"
+    ],
+    "must_not_include": [
+      "retry forever",
+      "retries alone provide fault tolerance",
+      "unbounded queue"
+    ],
+    "required_patterns": [
+      "Critical path",
+      "Static stability|last known good",
+      "Recovery practice|dead-letter"
+    ]
+  },
+  {
+    "id": "config-service-request-path",
+    "prompt": "Review a request path that fetches feature configuration from a control service on every request.",
+    "fixture": "config-service-request-path.good.md",
+    "must_include": [
+      "serving requests currently depends on the control service",
+      "last known good config",
+      "control-plane failure should block config changes, not existing traffic",
+      "freshness telemetry"
+    ],
+    "must_not_include": [
+      "fail closed on every request",
+      "fetch live config on every request",
+      "control service outage should stop traffic"
+    ],
+    "required_patterns": [
+      "Critical path",
+      "Isolation",
+      "Static stability"
+    ]
+  },
+  {
+    "id": "global-rollout",
+    "prompt": "Review a schema migration and application change planned for all customers at once.",
+    "fixture": "global-rollout.good.md",
+    "must_include": [
+      "progressive delivery",
+      "blast-radius controls",
+      "mixed-version compatibility",
+      "rollback",
+      "production cohorts"
+    ],
+    "must_not_include": [
+      "ship to all customers at once",
+      "big bang rollout",
+      "rollback is optional"
+    ],
+    "required_patterns": [
+      "Progressive delivery",
+      "Failure modes",
+      "Recommendation"
+    ]
+  }
+]

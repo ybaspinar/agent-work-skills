@@ -8,6 +8,7 @@ Personal agent skills for turning messy work and decisions into clear, reusable 
 |---|---|
 | [`deliberate-response-loop`](skills/deliberate-response-loop/SKILL.md) | Emotional pressure, avoidance, anxiety, frustration, ambition, contempt, or conflict needs a deliberate next move. |
 | [`conventional-impact`](skills/conventional-impact/SKILL.md) | Completed engineering tickets need impact annotations, MR descriptions, sprint review notes, manager updates, release notes, or performance-review bullets. |
+| [`fault-tolerant-design`](skills/fault-tolerant-design/SKILL.md) | Reliability-sensitive software, critical paths, dependencies, rollouts, jobs, queues, database changes, or failure modes need fault-tolerance review. |
 
 ## Structure
 
@@ -19,8 +20,12 @@ skills/
   conventional-impact/
     SKILL.md
     evals/
+  fault-tolerant-design/
+    SKILL.md
+    evals/
 docs/
   superpowers/specs/
+  superpowers/plans/
 ```
 
 Each skill is canonical under `skills/<skill-name>/SKILL.md`. Keep evals beside the skill they verify.
