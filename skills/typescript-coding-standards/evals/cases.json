@@ -1,0 +1,68 @@
+[
+  {
+    "id": "endpoint-parsing-bugfix",
+    "prompt": "Review a TypeScript endpoint bugfix that adds displayName to JSON.parse(req.body), truthy validation, and raw strings through service/persistence.",
+    "fixture": "endpoint-parsing-bugfix.good.md",
+    "must_include": [
+      "parse the touched boundary",
+      "domain/refined type",
+      "typed error",
+      "translate at the existing framework boundary",
+      "do not pass raw DTOs"
+    ],
+    "must_not_include": [
+      "just add another truthy check",
+      "keep raw strings for consistency",
+      "typed errors are too much blast radius"
+    ],
+    "required_patterns": [
+      "Parse,? do not merely validate|Parse the touched boundary",
+      "Result<|typed error",
+      "EmailAddress|DisplayName|domain/refined"
+    ]
+  },
+  {
+    "id": "password-reset-adapter",
+    "prompt": "Review a TypeScript password-reset feature that wants to add one method to an already-wide UsersRepository without checking existing adapters.",
+    "fixture": "password-reset-adapter.good.md",
+    "must_include": [
+      "adapter reuse audit",
+      "narrow dependency type",
+      "extend only if it fits",
+      "ADR",
+      "cohesive capability"
+    ],
+    "must_not_include": [
+      "one more method is fine",
+      "skip the audit",
+      "no ADR"
+    ],
+    "required_patterns": [
+      "UsersForPasswordReset|narrow dependency",
+      "reuse.*extend.*create|Reuse.*Extend.*Create",
+      "bad coupling|cohesive capability"
+    ]
+  },
+  {
+    "id": "release-flaky-test-config",
+    "prompt": "Review a TypeScript release-blocking flaky invitation-email test that uses vi.mock spies and process.env.INVITE_SECRET! inside the module.",
+    "fixture": "release-flaky-test-config.good.md",
+    "must_include": [
+      "real seam",
+      "fake email adapter",
+      "parse config at startup",
+      "no non-null assertion",
+      "observable behavior"
+    ],
+    "must_not_include": [
+      "add another spy assertion",
+      "keep module mocks",
+      "INVITE_SECRET!"
+    ],
+    "required_patterns": [
+      "vi\\.mock|jest\\.mock|module mock",
+      "Redacted|typed config|startup",
+      "sent email record|observable behavior"
+    ]
+  }
+]

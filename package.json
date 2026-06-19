@@ -4,6 +4,6 @@
   "type": "module",
   "scripts": {
     "test": "node --test skills/*/evals/*.test.mjs",
-    "eval": "node skills/deliberate-response-loop/evals/run-evals.mjs && node skills/conventional-impact/evals/run-evals.mjs && node skills/fault-tolerant-design/evals/run-evals.mjs"
+    "eval": "node skills/deliberate-response-loop/evals/run-evals.mjs && node skills/conventional-impact/evals/run-evals.mjs && node skills/fault-tolerant-design/evals/run-evals.mjs && node skills/typescript-coding-standards/evals/run-evals.mjs"
   }
 }
