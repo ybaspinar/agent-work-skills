@@ -1,0 +1,82 @@
+[
+  {
+    "id": "bulk-import-plan",
+    "prompt": "Review a bulk user import endpoint that trusts browser CSV validation, parses synchronously, creates users, sends emails, and writes failures to a file. Launch is tomorrow, so distinguish must-fix from can-defer.",
+    "fixture": "bulk-import-plan.good.md",
+    "must_include": [
+      "Client-side validation is UX, not security",
+      "server-side",
+      "file size",
+      "row count",
+      "idempotency",
+      "bounded",
+      "durable import record",
+      "welcome emails",
+      "failure metrics"
+    ],
+    "must_not_include": [
+      "trust the browser validation",
+      "unbounded queue",
+      "local failure file is fine",
+      "just add tests later"
+    ],
+    "required_patterns": [
+      "Must fix",
+      "Can defer",
+      "backpressure|reject larger|202|background job",
+      "owner|expiry|runbook|operational"
+    ]
+  },
+  {
+    "id": "double-charge-verification",
+    "prompt": "Verify an urgent checkout double-charge fix where the author says a unit test passes and the diff uses an idempotency key.",
+    "fixture": "double-charge-verification.good.md",
+    "must_include": [
+      "red before the fix",
+      "green after",
+      "same idempotency key",
+      "exactly one provider charge",
+      "concurrent",
+      "ambiguous timeout",
+      "permanent regression"
+    ],
+    "must_not_include": [
+      "the diff proves the fix",
+      "green test alone is sufficient",
+      "verification is done because the unit test passes",
+      "manual code review is sufficient"
+    ],
+    "required_patterns": [
+      "Evidence sufficient|Accept",
+      "replay|retry",
+      "running system|sandbox|staging|provider"
+    ]
+  },
+  {
+    "id": "api-retirement",
+    "prompt": "Review a plan to retire an old public API endpoint tomorrow after grepping the main repo and finding no callers. The team will return 410, delete the handler, defer docs cleanup, and reserve the route forever.",
+    "fixture": "api-retirement.good.md",
+    "must_include": [
+      "live telemetry",
+      "usage cycle",
+      "Sunset",
+      "deprecation window",
+      "tombstone handler",
+      "docs",
+      "owner and expiry",
+      "resurrection guard"
+    ],
+    "must_not_include": [
+      "source search is enough",
+      "hard cut tomorrow is safe",
+      "defer current docs cleanup",
+      "reserve the route forever just in case"
+    ],
+    "required_patterns": [
+      "Must fix",
+      "Can defer",
+      "reverse|contract",
+      "410 Gone|tombstone"
+    ]
+  }
+]
