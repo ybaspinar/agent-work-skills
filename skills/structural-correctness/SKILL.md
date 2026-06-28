@@ -61,22 +61,22 @@ Use this shape for broad design/review answers. Compress when the ask is narrow,
 - Simplify/delete instead:
 ```
 
-## Phase lenses
+## Phase-specific subskills
 
-Choose the lens that matches the user's task.
+Use this skill as the umbrella lens when the task spans phases or the phase is unclear. When the user is inside one phase, load the smaller subskill instead.
 
-| Phase | Structural checks |
-|---|---|
-| Triage | Treat report as untrusted; reproduce before ranking; rank by evidence and blast radius; assign one owner; record explicit disposition. |
-| Planning | Bound load-bearing unknowns; anchor facts to owners; define done once; cap scope; separate decision from doing; sequence reversible steps; name failure modes. |
-| Implementing | Parse at the door; keep reasoning local; give ambient dependencies one seam; use revealing names; deadline waits; bound resources; make mutation atomic/idempotent; make failures visible; write contract tests. |
-| Integrating | Map shared substrate and cycles; pin the boundary contract; bound what the whole can do to this part and what this part can do to the whole; give distributed invariants a home; ramp in dark; probe end to end. |
-| Reviewing | Read for locality; audit boundaries; hunt silent swallows; find caller-controlled unbounded growth; find check-then-act windows and unsafe replay; trace acquire to release; judge blast radius/reversibility; demand contract tests. |
-| Verifying | Watch the original repro fail before and pass after; verify acceptance criteria, not the diff; drive worst boundary input; exercise degraded paths; replay/interleave/interrupt stateful operations; verify at reachable scale; make the regression reproducible. |
-| Operating | Ship behind reversible flags/canaries when radius justifies it; promote on signals; split release decision from irreversible act; rehearse degradation; use deadlines, backoff, jitter, breakers, and clean shutdown; give operational artefacts owners and expiry. |
-| Investigating | Name one question; pin a deterministic repro or measured failure rate; falsify and bisect; read existing telemetry first; distrust narratives and wall-clock ordering; throw spikes away; hand off diagnosis plus a failing test. |
-| Retrospective | Reproduce cause from signals; blame the system gap, not the person; turn missing signal into alert/test; delete the failure mode before adding guardrails; every follow-up has owner/date; feed work back to triage. |
-| Retirement | Prove zero use from live telemetry over the real usage cycle; deprecate with a sunset window; contract in reverse; separate delete plan from delete act; remove/re-home derivations; honor hard-delete duties; delete code/config/docs together; guard against resurrection. |
+| Phase | Use subskill | Structural checks |
+|---|---|---|
+| Triage | `structural-triage` | Treat report as untrusted; reproduce before ranking; rank by evidence and blast radius; assign one owner; record explicit disposition. |
+| Planning | `structural-planning` | Bound load-bearing unknowns; anchor facts to owners; define done once; cap scope; separate decision from doing; sequence reversible steps; name failure modes. |
+| Implementing | `structural-implementing` | Parse at the door; keep reasoning local; give ambient dependencies one seam; use revealing names; deadline waits; bound resources; make mutation atomic/idempotent; make failures visible; write contract tests. |
+| Integrating | `structural-integrating` | Map shared substrate and cycles; pin the boundary contract; bound what the whole can do to this part and what this part can do to the whole; give distributed invariants a home; ramp in dark; probe end to end. |
+| Reviewing | `structural-reviewing` | Read for locality; audit boundaries; hunt silent swallows; find caller-controlled unbounded growth; find check-then-act windows and unsafe replay; trace acquire to release; judge blast radius/reversibility; demand contract tests. |
+| Verifying | `structural-verifying` | Watch the original repro fail before and pass after; verify acceptance criteria, not the diff; drive worst boundary input; exercise degraded paths; replay/interleave/interrupt stateful operations; verify at reachable scale; make the regression reproducible. |
+| Operating | `structural-operating` | Ship behind reversible flags/canaries when radius justifies it; promote on signals; split release decision from irreversible act; rehearse degradation; use deadlines, backoff, jitter, breakers, and clean shutdown; give operational artefacts owners and expiry. |
+| Investigating | `structural-investigating` | Name one question; pin a deterministic repro or measured failure rate; falsify and bisect; read existing telemetry first; distrust narratives and wall-clock ordering; throw spikes away; hand off diagnosis plus a failing test. |
+| Retrospective | `structural-retrospective` | Reproduce cause from signals; blame the system gap, not the person; turn missing signal into alert/test; delete the failure mode before adding guardrails; every follow-up has owner/date; feed work back to triage. |
+| Retirement | `structural-retirement` | Prove zero use from live telemetry over the real usage cycle; deprecate with a sunset window; contract in reverse; separate delete plan from delete act; remove/re-home derivations; honor hard-delete duties; delete code/config/docs together; guard against resurrection. |
 
 ## Core moves
 
