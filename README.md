@@ -15,6 +15,7 @@ Personal agent skills for turning messy work and decisions into clear, reusable 
 | [`structural-implementing`](skills/structural-implementing/SKILL.md) | Non-trivial code paths, handlers, jobs, workflows, parsers, retries, or behavior changes need structural implementation checks. |
 | [`structural-integrating`](skills/structural-integrating/SKILL.md) | Features, services, dependencies, APIs, models, adapters, or pipelines are being wired into a larger system. |
 | [`structural-reviewing`](skills/structural-reviewing/SKILL.md) | Code, PRs, migrations, endpoint changes, jobs, queues, tests, or operational changes need structural review. |
+| [`objective-code-review`](skills/objective-code-review/SKILL.md) | Commits, PRs, or MRs need objective review for requirements, scope, project fit, non-functional obligations, and regression protection. |
 | [`structural-verifying`](skills/structural-verifying/SKILL.md) | Fixes, features, migrations, release candidates, or behavior changes need running-system proof. |
 | [`structural-operating`](skills/structural-operating/SKILL.md) | Releases, rollouts, ramps, migrations, monitoring, rollback, on-call readiness, or runbooks need operating checks. |
 | [`structural-investigating`](skills/structural-investigating/SKILL.md) | Defects, spikes, unknowns, flaky behavior, incidents, or hypotheses need bounded investigation. |
@@ -47,6 +48,8 @@ skills/
   structural-integrating/
     SKILL.md
   structural-reviewing/
+    SKILL.md
+  objective-code-review/
     SKILL.md
   structural-verifying/
     SKILL.md
