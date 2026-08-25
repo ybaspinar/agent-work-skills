@@ -36,6 +36,40 @@ Do not invent a requirement from preference. If available evidence cannot establ
 
 A passing test suite is evidence, not proof that the requirement is satisfied. Trace the requirement through the changed behavior.
 
+## Tiger Style lens
+
+Borrow [Tiger Style](https://tigerstyle.dev/)'s safety, performance, and experience lenses, not its project-specific rulebook. Apply them proportionately to the changed surface.
+
+### Safety
+
+Correctness is necessary but not sufficient. For code at a meaningful boundary or failure domain, check:
+
+- explicit limits on caller-controlled resources, concurrency, retries, queues, loops, and fan-out;
+- invariants expressed through types, assertions, or validation at the point where violation becomes dangerous;
+- failures that are visible and contained instead of silently swallowed or converted into false success;
+- interfaces with minimal surface area, clear ownership, and a defined fault model;
+- deterministic seams around physical or non-deterministic dependencies where the project already supports them.
+
+Do not demand assertions, limits, or fault machinery without a concrete failure mode. Existing behavior on a trusted, naturally bounded path is not a blocker merely because it lacks extra defense-in-depth.
+
+### Performance
+
+For changes that can materially affect latency, throughput, or capacity, make a rough mechanical sketch across network, storage, memory, and compute. Consider both bandwidth and latency, including multiplicative costs such as unbounded fan-out, repeated allocation or copying, serialization, and per-item I/O.
+
+Performance findings need repository evidence, measurements, an explicit requirement, or a plausible material scale. Do not block on speculative micro-optimization.
+
+### Experience
+
+Optimize for the total cost of ownership: users who run the product and engineers who read, debug, and operate it repeatedly. Prefer:
+
+- direct control and data flow;
+- small interfaces and simple representations;
+- names that expose meaning, units, ordering, and limits;
+- state and variables defined close to where they are used;
+- designs whose failure behavior can be understood locally.
+
+Project conventions still win. Do not impose Tiger Style's static allocation, zero-dependency policy, fixed integer choices, naming syntax, recursion ban, or zero-technical-debt stance unless the project or a concrete requirement calls for them. In particular, never use “zero technical debt” to expand a scoped change.
+
 ## Scope discipline
 
 Allow:
@@ -114,16 +148,18 @@ When there are findings, start with the decision and group feedback as applicabl
 Decision: Request changes | Approve with comments
 
 Blocking
-- `path/to/file.ext:line` — Direct verdict plus one concrete reason.
+- `path/to/file.ext:line` — `[Safety | Performance | Experience]` Direct verdict plus one concrete reason.
 
 Questions
-- `path/to/file.ext:line` — Precise question naming the missing fact and risk.
+- `path/to/file.ext:line` — `[Safety | Performance | Experience]` Precise question naming the missing fact and risk.
 
 Non-blocking
-- `path/to/file.ext:line` — Optional improvement plus one concrete reason.
+- `path/to/file.ext:line` — `[Safety | Performance | Experience]` Optional improvement plus one concrete reason.
 ```
 
 Keep each finding to a direct verdict plus one reason. Point to the smallest useful file and line range. Suggest an implementation only when it materially removes ambiguity, and never imply that one implementation is the only acceptable fix.
+
+Use a Tiger Style lens tag only when it sharpens the reason. Omit it for contract, scope, project-fit, or test findings that do not belong to one of the three lenses.
 
 When no actionable problems exist, output only:
 
