@@ -1,0 +1,62 @@
+[
+  {
+    "id": "greenfield-copied-v3-controller",
+    "prompt": "Review a new controller in a new project copied from another service. It is named OrdersV3Controller although this project has no V1 or V2 and no external V3 contract.",
+    "fixture": "greenfield-copied-v3-controller.good.md",
+    "must_include": [
+      "Decision: Request changes",
+      "Blocking",
+      "semantic integrity",
+      "copied history",
+      "no V1, V2, or external V3 contract",
+      "copy residue",
+      "amplifying the defect"
+    ],
+    "must_not_include": [
+      "Approve with comments",
+      "non-blocking naming nit",
+      "follow the copied convention"
+    ],
+    "required_patterns": [
+      "remove `?V3`?|rename.*unversioned|real compatibility contract",
+      "controller.*future.*pattern|public.*contract"
+    ]
+  },
+  {
+    "id": "optional-boolean-repeated-negative-check",
+    "prompt": "Review new domain code that defines enabled?: boolean and repeats enabled !== false in controllers and services because undefined should behave like true.",
+    "fixture": "optional-boolean-repeated-negative-check.good.md",
+    "must_include": [
+      "Decision: Request changes",
+      "Blocking",
+      "state model",
+      "change amplification",
+      "three states",
+      "default once at the boundary",
+      "repeated defensive reasoning",
+      "multiplies the places"
+    ],
+    "must_not_include": [
+      "Approve with comments",
+      "idiomatic enough",
+      "optional cleanup"
+    ],
+    "required_patterns": [
+      "true.*false.*undefined|true.*false.*absent",
+      "required boolean|enum|union|named state"
+    ]
+  },
+  {
+    "id": "externally-versioned-controller",
+    "prompt": "Review a controller named BillingV3Controller in a new repository that implements an existing public partner V3 protocol while V1 and V2 remain supported by another deployed service.",
+    "fixture": "externally-versioned-controller.good.md",
+    "must_include": [
+      "Approve"
+    ],
+    "must_not_include": [
+      "Request changes",
+      "remove V3",
+      "greenfield code must start at V1"
+    ]
+  }
+]
