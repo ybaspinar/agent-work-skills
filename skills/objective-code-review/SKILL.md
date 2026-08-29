@@ -37,6 +37,44 @@ Do not invent a requirement from preference. If available evidence cannot establ
 
 A passing test suite is evidence, not proof that the requirement is satisfied. Trace the requirement through the changed behavior.
 
+## Review the structural delta
+
+Treat behavior changes as changes to system structure, not isolated lines.
+
+For a **bug fix**, trace:
+
+1. the observable symptom;
+2. the representation, boundary, ownership gap, dependency, or control flow that allowed it;
+3. the path by which it escaped existing types, tests, validation, or signals;
+4. the new home of the invariant;
+5. the compensating guards or duplicate policy the fix makes removable.
+
+Do not approve a patch that only suppresses the reported input when the same allowing structure remains. A local correction is sufficient when the invariant already exists, the system normally enforces it, and the defect is genuinely isolated—for example, incorrect static text.
+
+For a **feature**, identify the structure it creates or modifies:
+
+- public and internal contracts;
+- shared domain vocabulary used by product owners, project or product managers, designers, documentation, support, and engineers;
+- domain states and transitions;
+- responsibility and ownership;
+- dependencies and component boundaries;
+- data relationships, ordering, identity, and expected size;
+- resource, failure, observability, compatibility, and test obligations.
+
+A feature is incomplete when its happy path works but its new states, boundaries, ownership, or failure behavior remain implicit.
+
+### Structural probes, not a checklist
+
+Use only probes relevant to the changed surface. Convert every concern into an observable mismatch, violated invariant, or concrete change cost.
+
+- **Architecture and semantics** — Does the implementation follow the deliberate architecture? Are APIs, names, versions, types, and product vocabulary consistent and truthful?
+- **Local comprehension and total flow** — Can the behavior, component interactions, conditional outcomes, failures, and transitions be understood from declared inputs without hunting through hidden state?
+- **Cohesion and boundaries** — Does each component own one cohesive policy? Are dependencies minimal, explicit, testable, and directed toward the invariant's owner?
+- **Representation fitness** — Do types and data structures naturally express required states, relationships, ordering, identity, cardinality, and dominant operations without sentinels, parallel collections, awkward key mutation, or caller compensation?
+- **Evolution cost** — At evidenced data size and caller growth, does the design remain bounded and changeable without speculative abstraction or premature optimization?
+
+Code length, modularity, reuse, loose coupling, composition, and inheritance are not goals by themselves. Use them only as evidence for or remedies to a concrete comprehension, ownership, representation, testability, or change-cost problem. A stack models LIFO; a queue models FIFO; judge either by required ordering rather than a generic preference.
+
 ## Tiger Style lens
 
 Borrow [Tiger Style](https://tigerstyle.dev/)'s safety, performance, and experience lenses, not its project-specific rulebook. Apply them proportionately to the changed surface.
@@ -84,6 +122,9 @@ Check the touched design for:
 - **Truthful state models** — Types represent the domain states callers may rely on. An optional boolean creates three states: `true`, `false`, and absent. If absence has no distinct meaning, remove the optionality or default once at the boundary. If the domain has more than two meaningful states, use the language's enum, union, discriminated union, or equivalent named representation.
 - **Local reasoning** — Do not make every caller remember permissive expressions such as `flag !== false`, double negation, sentinel combinations, or repeated absent-value checks. Give the policy one name and one boundary.
 - **Justified abstraction** — Every suffix, layer, mode, and configuration branch must correspond to a present requirement or established project contract, not anticipated history or cargo-culted structure.
+- **Shared domain vocabulary** — Use the same concept name used by the people defining and operating the product, whether that group is called product, project management, a product owner, or something else. Check tickets, acceptance criteria, UI copy, product documentation, support language, APIs, events, metrics, tests, and nearby code. Two names for one concept force engineers and stakeholders to translate mentally; one name for two concepts hides a domain distinction.
+
+Treat this as semantic correctness, not naming taste. If authoritative sources disagree, ask which term is canonical and name the affected contracts. When a legacy or external protocol requires another term, translate once at that boundary and keep the shared vocabulary inside. Do not spread aliases through the system.
 
 These are not cosmetic findings when introduced by the change. Request changes when misleading history, an ambiguous state model, or copied residue establishes a public contract or a pattern future code must repeat. Keep a one-off readability improvement non-blocking only when the current representation is still semantically exact and locally obvious.
 
@@ -95,9 +136,11 @@ Call this family **structural design defects**: the code may execute today, but 
 
 Use one subtype:
 
-- **Semantic integrity defect** — A name, version, comment, or interface claims history or meaning the system does not have. Example: a greenfield `V3` controller with no predecessor or external V3 contract.
+- **Semantic integrity defect** — A name, version, comment, interface, or domain term claims history or meaning the system does not have, or introduces a second name for an existing product concept. Example: a greenfield `V3` controller with no predecessor or a feature called “Saved Views” by the product team but “Presets” throughout new code.
 - **Copy-residue defect** — Reused code retains source-system identity, policy, assumptions, or dead branches that do not belong in the target.
 - **State-model defect** — The representation permits unnamed, contradictory, or impossible states, so callers must infer policy. Example: an optional boolean when absence is not a real domain state.
+- **Boundary/ownership defect** — A responsibility or invariant has no clear owner, dependencies point the wrong way, or correctness relies on hidden component interactions.
+- **Representation mismatch** — A type or data structure does not naturally support the domain's relationships, ordering, size, or dominant operations, forcing compensating code.
 - **Change-amplification defect** — One policy is encoded as repeated conditions, sentinels, or compensating checks, increasing the number of places a correct change must touch.
 
 Process each defect with four facts:
@@ -109,7 +152,7 @@ Process each defect with four facts:
 
 Severity follows propagation and correction cost, not whether production has failed yet:
 
-- **Blocking** — The change introduces false semantics or an invalid state model into new code; establishes a public/shared contract; makes callers compensate; duplicates the workaround; or would require compatibility work or migration to correct after merge.
+- **Blocking** — The change introduces false semantics, competing vocabulary, or an invalid state model into new code; establishes a public/shared contract; makes callers compensate; duplicates the workaround; or would require compatibility work or migration to correct after merge.
 - **Separate follow-up** — The defect is pre-existing, not relied on or worsened by this change, and has a named owner.
 - **Non-blocking** — The representation is semantically exact and local; only presentation or readability could improve.
 
@@ -195,7 +238,7 @@ When there are findings, start with the decision and group feedback as applicabl
 Decision: Request changes | Approve with comments
 
 Blocking
-- `path/to/file.ext:line` — `[Semantic integrity | Copy residue | State model | Change amplification]` Direct verdict plus one concrete reason.
+- `path/to/file.ext:line` — `[Semantic integrity | Copy residue | State model | Boundary/ownership | Representation mismatch | Change amplification]` Direct verdict plus one concrete reason.
 
 Questions
 - `path/to/file.ext:line` — Precise question naming the missing fact and risk.
@@ -223,5 +266,6 @@ Approve
 - forcing the author to fix unrelated pre-existing debt;
 - approving because tests pass without checking the actual requirement;
 - treating copied code as an established convention without checking whether its names, versions, states, and assumptions are valid here;
+- introducing implementation terminology that conflicts with the shared product vocabulary without a real domain distinction or external compatibility constraint;
 - dismissing a misleading greenfield model as “just maintainability” when it creates the contract future changes must follow;
 - burying a blocker among nits or optional suggestions.

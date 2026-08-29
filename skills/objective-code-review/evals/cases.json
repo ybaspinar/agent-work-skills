@@ -47,6 +47,78 @@
     ]
   },
   {
+    "id": "bugfix-leaves-allowing-structure",
+    "prompt": "Review a bug fix that adds enabled !== false in one controller after undefined disabled a feature. The domain model still declares enabled?: boolean, other callers use truthiness, and tests cover only the controller.",
+    "fixture": "bugfix-leaves-allowing-structure.good.md",
+    "must_include": [
+      "Decision: Request changes",
+      "allowing structure",
+      "state model",
+      "change amplification",
+      "new home of the invariant",
+      "all callers",
+      "regression"
+    ],
+    "must_not_include": [
+      "reported input is fixed",
+      "Approve with comments",
+      "leave the other callers for later"
+    ],
+    "required_patterns": [
+      "optional boolean|enabled\\?: boolean",
+      "default.*boundary|required boolean|named state",
+      "remove|replace.*compensating"
+    ]
+  },
+  {
+    "id": "feature-creates-implicit-structure",
+    "prompt": "Review a new report-export feature where the controller and service both write raw string status values, the controller directly owns storage and notification clients, failure transitions are undefined, and tests cover only the happy path.",
+    "fixture": "feature-creates-implicit-structure.good.md",
+    "must_include": [
+      "Decision: Request changes",
+      "boundary/ownership",
+      "state model",
+      "single owner",
+      "explicit transition",
+      "failure",
+      "contract test"
+    ],
+    "must_not_include": [
+      "the happy path is enough",
+      "Approve with comments",
+      "split it because the controller is long"
+    ],
+    "required_patterns": [
+      "state machine|allowed transitions",
+      "storage.*notification|notification.*storage",
+      "observable.*contract|contract test"
+    ]
+  },
+  {
+    "id": "competing-product-vocabulary",
+    "prompt": "Review a new feature called Saved Views in the ticket, acceptance criteria, UI, support docs, and by the product owner. The implementation introduces PresetController, /presets, PresetCreated, and preset metrics. There is no domain distinction or external compatibility constraint.",
+    "fixture": "competing-product-vocabulary.good.md",
+    "must_include": [
+      "Decision: Request changes",
+      "semantic integrity",
+      "shared domain vocabulary",
+      "Saved Views",
+      "Presets",
+      "translate mentally",
+      "product owner"
+    ],
+    "must_not_include": [
+      "non-blocking naming nit",
+      "internal code can use different terminology",
+      "Approve with comments"
+    ],
+    "required_patterns": [
+      "controller.*route.*event.*metric|route.*event.*metric.*test",
+      "rename|align",
+      "external.*boundary|compatibility constraint"
+    ]
+  },
+  {
     "id": "externally-versioned-controller",
     "prompt": "Review a controller named BillingV3Controller in a new repository that implements an existing public partner V3 protocol while V1 and V2 remain supported by another deployed service.",
     "fixture": "externally-versioned-controller.good.md",
