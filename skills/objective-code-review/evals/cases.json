@@ -4,8 +4,8 @@
     "prompt": "Review a new controller in a new project copied from another service. It is named OrdersV3Controller although this project has no V1 or V2 and no external V3 contract.",
     "fixture": "greenfield-copied-v3-controller.good.md",
     "must_include": [
-      "Decision: Request changes",
-      "Blocking",
+      "Review assessment",
+      "Material concerns",
       "semantic integrity",
       "copied history",
       "no V1, V2, or external V3 contract",
@@ -13,7 +13,10 @@
       "amplifying the defect"
     ],
     "must_not_include": [
-      "Approve with comments",
+      "Decision:",
+      "Request changes",
+      "Approve",
+      "Disapprove",
       "non-blocking naming nit",
       "follow the copied convention"
     ],
@@ -27,8 +30,8 @@
     "prompt": "Review new domain code that defines enabled?: boolean and repeats enabled !== false in controllers and services because undefined should behave like true.",
     "fixture": "optional-boolean-repeated-negative-check.good.md",
     "must_include": [
-      "Decision: Request changes",
-      "Blocking",
+      "Review assessment",
+      "Material concerns",
       "state model",
       "change amplification",
       "three states",
@@ -37,7 +40,10 @@
       "multiplies the places"
     ],
     "must_not_include": [
-      "Approve with comments",
+      "Decision:",
+      "Request changes",
+      "Approve",
+      "Disapprove",
       "idiomatic enough",
       "optional cleanup"
     ],
@@ -51,7 +57,8 @@
     "prompt": "Review a bug fix that adds enabled !== false in one controller after undefined disabled a feature. The domain model still declares enabled?: boolean, other callers use truthiness, and tests cover only the controller.",
     "fixture": "bugfix-leaves-allowing-structure.good.md",
     "must_include": [
-      "Decision: Request changes",
+      "Review assessment",
+      "Material concerns",
       "allowing structure",
       "state model",
       "change amplification",
@@ -60,8 +67,11 @@
       "regression"
     ],
     "must_not_include": [
+      "Decision:",
+      "Request changes",
+      "Approve",
+      "Disapprove",
       "reported input is fixed",
-      "Approve with comments",
       "leave the other callers for later"
     ],
     "required_patterns": [
@@ -75,7 +85,8 @@
     "prompt": "Review a new report-export feature where the controller and service both write raw string status values, the controller directly owns storage and notification clients, failure transitions are undefined, and tests cover only the happy path.",
     "fixture": "feature-creates-implicit-structure.good.md",
     "must_include": [
-      "Decision: Request changes",
+      "Review assessment",
+      "Material concerns",
       "boundary/ownership",
       "state model",
       "single owner",
@@ -84,8 +95,11 @@
       "contract test"
     ],
     "must_not_include": [
+      "Decision:",
+      "Request changes",
+      "Approve",
+      "Disapprove",
       "the happy path is enough",
-      "Approve with comments",
       "split it because the controller is long"
     ],
     "required_patterns": [
@@ -99,7 +113,8 @@
     "prompt": "Review a new feature called Saved Views in the ticket, acceptance criteria, UI, support docs, and by the product owner. The implementation introduces PresetController, /presets, PresetCreated, and preset metrics. There is no domain distinction or external compatibility constraint.",
     "fixture": "competing-product-vocabulary.good.md",
     "must_include": [
-      "Decision: Request changes",
+      "Review assessment",
+      "Material concerns",
       "semantic integrity",
       "shared domain vocabulary",
       "Saved Views",
@@ -108,9 +123,12 @@
       "product owner"
     ],
     "must_not_include": [
+      "Decision:",
+      "Request changes",
+      "Approve",
+      "Disapprove",
       "non-blocking naming nit",
-      "internal code can use different terminology",
-      "Approve with comments"
+      "internal code can use different terminology"
     ],
     "required_patterns": [
       "controller.*route.*event.*metric|route.*event.*metric.*test",
@@ -123,10 +141,14 @@
     "prompt": "Review a controller named BillingV3Controller in a new repository that implements an existing public partner V3 protocol while V1 and V2 remain supported by another deployed service.",
     "fixture": "externally-versioned-controller.good.md",
     "must_include": [
-      "Approve"
+      "Review assessment",
+      "No material concerns found in the reviewed scope"
     ],
     "must_not_include": [
+      "Decision:",
       "Request changes",
+      "Approve",
+      "Disapprove",
       "remove V3",
       "greenfield code must start at V1"
     ]
